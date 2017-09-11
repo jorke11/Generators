@@ -11,12 +11,16 @@ package generators;
  */
 public class Variables {
 
-    public double seeder, output, x4;
+    public double seeder, output, x4, rand;
     public int x1, x2, x3;
 
     public Variables(double seeder, double output) {
         this.seeder = seeder;
         this.output = output;
+    }
+
+    public Variables(double rand) {
+        this.rand = rand;
     }
 
     public Variables(int x1, int x2, int x3, int x4) {

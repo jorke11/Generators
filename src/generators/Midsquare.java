@@ -81,22 +81,23 @@ public class Midsquare extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGenerate)
-                .addGap(148, 148, 148))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtSeeder, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtSeeder, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(btnGenerate)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +114,7 @@ public class Midsquare extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGenerate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,32 +131,35 @@ public class Midsquare extends javax.swing.JInternalFrame {
         ArrayList<Variables> response = new ArrayList<>();
         int quant = 0;
         String x2 = "";
+        if (txtSeeder.getText().toString().length() >= 4) {
 
-        while (cont < limit) {
-            obj[0] = x1;
-            x2 = String.valueOf((int) Math.pow(x1, 2));
-            obj[1] = x2;
-            System.out.println("completa " + x2);
-            if (x2.length() > 6) {
-                if (x2.length() % 2 != 0) {
-                    
-                    x2 = x2 + "0";
+            while (cont < limit) {
+                obj[0] = x1;
+                x2 = String.valueOf((int) Math.pow(x1, 2));
+                obj[1] = x2;
+                System.out.println("completa " + x2);
+                if (x2.length() > 4) {
+                    if (x2.length() % 2 != 0) {
+                        x2 = "0" + x2;
+                    }
+                    quant = String.valueOf(x2).length() - txtSeeder.getText().toString().length();
+                    quant = quant / 2;
+                    x3 = Integer.parseInt(x2.substring(quant, x2.length() - quant));
+                    obj[2] = x3;
+                    x4 = Double.parseDouble("0." + x3);
+                    obj[3] = x4;
+                    x1 = x3;
+
+                } else {
+                    System.out.println("agregar ceros");
                 }
-                quant = String.valueOf(x2).length() - 4;
-                quant = quant / 2;
-                x3 = Integer.parseInt(x2.substring(quant, x2.length() - quant));
-                obj[2] = x3;
-                x4 = Double.parseDouble("0." + x3);
-                obj[3] = x4;
-                x1 = x3;
 
-            } else {
-                System.out.println("agregar ceros");
+                dtm.addRow(obj);
+
+                cont++;
             }
+        } else {
 
-            dtm.addRow(obj);
-
-            cont++;
         }
 
     }//GEN-LAST:event_btnGenerateActionPerformed
