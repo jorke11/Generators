@@ -126,29 +126,40 @@ public class Midsquare extends javax.swing.JInternalFrame {
         int limit = Integer.parseInt(txtQuantity.getText().toString()), cont = 0;
 
         Object[] obj = new Object[4];
-        int x1 = Integer.parseInt(txtSeeder.getText().toString()), x3 = 0;
+        String x1 = txtSeeder.getText().toString();
+        
         double x4 = 0;
         ArrayList<Variables> response = new ArrayList<>();
         int quant = 0;
-        String x2 = "";
+        String x2 = "", temp = "",x3="";
         if (txtSeeder.getText().toString().length() >= 4) {
 
             while (cont < limit) {
                 obj[0] = x1;
-                x2 = String.valueOf((int) Math.pow(x1, 2));
+
+                x2 = String.valueOf((int) Math.pow(Integer.parseInt(x1), 2));
                 obj[1] = x2;
                 System.out.println("completa " + x2);
                 if (x2.length() > 4) {
                     if (x2.length() % 2 != 0) {
                         x2 = "0" + x2;
                     }
-                    quant = String.valueOf(x2).length() - txtSeeder.getText().toString().length();
-                    quant = quant / 2;
-                    x3 = Integer.parseInt(x2.substring(quant, x2.length() - quant));
+//                    quant = String.valueOf(x2).length() - txtSeeder.getText().toString().length();
+                    quant = x1.length() / 2;
+
+                    //Codigo antes
+//                    x3 = Integer.parseInt(x2.substring(quant, x2.length() - quant));
+                    //Codigo parcial
+                    temp = x2.substring(0, quant);
+                    
+                    
+                    System.out.println("x2" + x2);
+                    x3 = temp + x2.substring(x2.length() - quant, x2.length());
+
                     obj[2] = x3;
                     x4 = Double.parseDouble("0." + x3);
                     obj[3] = x4;
-                    x1 = x3;
+                    x1 = String.valueOf(x3);
 
                 } else {
                     System.out.println("agregar ceros");
